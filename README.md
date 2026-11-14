@@ -2,7 +2,7 @@
 
 ![dbt build](https://github.com/munyingi/revenue-reconciliation/actions/workflows/ci.yml/badge.svg)
 
-**Live report:** https://munyingi.github.io/revenue-reconciliation/ · **Streamlit app:** _add link after deploying_
+**Live report:** https://munyingi.github.io/revenue-reconciliation/ · **Streamlit app:** https://revenue-reconciliation.streamlit.app
 
 The CFO's report says October revenue was **€1,207,466.29**. The sales dashboard says **€1,259,490.39**.
 Nobody trusts either number, and the data team is asked to find out why.
