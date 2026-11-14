@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_shop__orders
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: order_total_eur
+        data_tests: [not_null]
+  - name: stg_psp__payment_events
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+      - name: event_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["captured", "failed", "expired"]
+  - name: stg_refunds__refunds
+    columns:
+      - name: refund_id
+        data_tests: [unique, not_null]
+      - name: refund_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["processed", "pending"]

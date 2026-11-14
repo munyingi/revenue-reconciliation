@@ -1,0 +1,22 @@
+name: reconcile
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements-pipeline.txt
+      - name: Generate data, load DuckDB, dbt build (tests fail the job if the gap is not fully explained)
+        run: make all TARGET=duckdb
+      - name: Data and report must match what is committed (generator is deterministic)
+        run: git diff --stat --exit-code -- data/raw dbt/seeds

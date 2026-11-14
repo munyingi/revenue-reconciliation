@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: recon_line_items
+    description: One row per order, payment event or refund that makes the two reports differ, with a label.
+    columns:
+      - name: line_id
+        data_tests: [unique, not_null]
+      - name: difference_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - failed_payment
+                  - payment_timing_lag
+                  - timezone_shift
+                  - refund_prior_period_order
+                  - fx_difference
+                  - duplicate_payment
+                  - refund_not_yet_processed
+                  - unmatched_payment
+                  - unmatched_refund
+      - name: difference_eur
+        data_tests: [not_null]
+
+  - name: recon_summary
+    description: Dashboard total, CFO total, gap, explained amount and unexplained remainder (must be 0).
+    columns:
+      - name: unexplained_eur
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0]
+                quote: false
+
+  - name: recon_bridge
+    description: Waterfall steps from the CFO number to the Sales dashboard number.
+    columns:
+      - name: step_order
+        data_tests: [unique, not_null]

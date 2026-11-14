@@ -1,0 +1,19 @@
+# Credentials are read from environment variables, so this file is safe to commit.
+revenue_recon:
+  target: "{{ env_var('DBT_TARGET', 'duckdb') }}"
+  outputs:
+    snowflake:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', '') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', '') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'RECON_ROLE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'RECON_WH') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'REVENUE_RECON') }}"
+      schema: ANALYTICS
+      threads: 4
+    duckdb:
+      type: duckdb
+      path: "{{ env_var('DUCKDB_PATH', '../data/warehouse.duckdb') }}"
+      schema: main
+      threads: 4

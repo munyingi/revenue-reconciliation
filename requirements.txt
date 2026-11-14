@@ -1,0 +1,5 @@
+# Streamlit Community Cloud installs this file. Pipeline extras are in requirements-pipeline.txt.
+streamlit>=1.40
+pandas>=2.2
+pyarrow>=15
+plotly>=5.24

@@ -1,0 +1,39 @@
+name: revenue_recon
+version: "1.0.0"
+config-version: 2
+profile: revenue_recon
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # Month being closed. Both reports are compared for this month only.
+  recon_month: "2026-10-01"
+
+models:
+  revenue_recon:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    reports:
+      +schema: reports
+      +materialized: table
+    reconciliation:
+      +schema: reconciliation
+      +materialized: table
+
+seeds:
+  revenue_recon:
+    +schema: test_fixtures
+    answer_key:
+      +column_types:
+        difference_type: varchar
+        expected_amount_eur: decimal(12,2)
+        expected_line_count: integer

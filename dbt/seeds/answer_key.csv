@@ -1,0 +1,8 @@
+difference_type,expected_amount_eur,expected_line_count
+duplicate_payment,-7601.68,31
+failed_payment,36499.37,168
+fx_difference,1382.23,611
+payment_timing_lag,7748.58,225
+refund_not_yet_processed,-36518.94,179
+refund_prior_period_order,37159.72,179
+timezone_shift,13354.82,72

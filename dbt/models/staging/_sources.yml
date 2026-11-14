@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    description: Raw extracts from the three source systems, loaded unchanged by pipeline/load_raw.py.
+    tables:
+      - name: shop_orders
+        description: Order system. created_at is naive Helsinki local time. One row per order.
+        columns:
+          - name: order_id
+            data_tests: [unique, not_null]
+      - name: psp_payment_events
+        description: Payment provider webhooks, UTC. Can contain duplicate deliveries of the same event.
+        columns:
+          - name: event_id
+            data_tests: [unique, not_null]
+      - name: refunds
+        description: Customer service refund tool, UTC. Refunds reference the PSP payment_id, not the order.
+        columns:
+          - name: refund_id
+            data_tests: [unique, not_null]

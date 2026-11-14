@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: rpt_sales_dashboard__monthly
+    description: The number the Sales dashboard shows, rebuilt exactly as the dashboard computes it.
+    columns:
+      - name: revenue_month
+        data_tests: [unique, not_null]
+  - name: rpt_cfo_revenue__monthly
+    description: The number in the CFO's monthly report, rebuilt exactly as finance computes it.
+    columns:
+      - name: revenue_month
+        data_tests: [unique, not_null]
